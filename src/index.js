@@ -1,9 +1,9 @@
 function el(type = "div", attrs = {}, children) {
-    type = type.toLowerCase();
+    type = type[0].toUpperCase() + type.slice(1).toLowerCase() + "Element";
 
     try {
-        const typedElement = typedElements.find((elem) => elem.type === type);
-        const elem = new typedElement.element();
+        const evalContent = `new ${type}()`;
+        const elem = eval(evalContent);
         elem.setAttrs(attrs);
 
         if (children) {
